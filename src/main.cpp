@@ -33,7 +33,7 @@ int main() {
   double sensor_range = 50;  // Sensor range [m]
 
   // GPS measurement uncertainty [x [m], y [m], theta [rad]]
-  double sigma_pos [3] = {0.3, 0.3, 0.01};
+  double sigma_pos [3] = {0.05, 0.05, 0.01};
   // Landmark measurement uncertainty [x [m], y [m]]
   double sigma_landmark [2] = {0.3, 0.3};
 
