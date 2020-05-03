@@ -14,9 +14,9 @@
 using std::string;
 using std::vector;
 
-
 void ParticleFilter::init(double x, double y, double theta, double std[])
 {
+  // Choose number of particles
   num_particles = 100;
 
   auto std_x = std[0];
@@ -57,10 +57,7 @@ void ParticleFilter::prediction(double delta_t, double std_pos[],
   std::default_random_engine gen;
 
   // Make prediction and add noise to each particle
-  for (int i = 0; i < num_particles; ++i)
-  {
-    Particle& p = particles[i];
-
+  for (auto& p : particles) {
     double theta_new = p.theta + yaw_rate * delta_t;
     if (yaw_rate < 1e-3) {
       p.x += velocity * cos(p.theta) * delta_t + noise_x(gen);
@@ -102,12 +99,12 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
   auto std_x = std_landmark[0];
   auto std_y = std_landmark[1];
 
-  for (auto& particle : particles) {
-    double p_x = particle.x;
-    double p_y = particle.y;
-    double p_theta = particle.theta;
+  for (auto& p : particles) {
+    double p_x = p.x;
+    double p_y = p.y;
+    double p_theta = p.theta;
 
-    // Get all landmarks within the sensor range
+    // Get landmarks within the sensor range
     std::vector<LandmarkObs> landmarks_in_range;
     for (const auto& map_lm : map_landmarks.landmark_list) {
       double d = dist(map_lm.x_f, map_lm.y_f, p_x, p_y);
@@ -138,23 +135,22 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
       // find the associated landmark
       for (const auto& lm : landmarks_in_range) {
         if (lm.id == obs.id) {
-          // Take the landmark as the mean of the Gaussian distribution
+          // Consider landmark position as the mean of the Gaussian distribution
           double u_x = lm.x;
           double u_y = lm.y;
-          // Calculate probability p(z | x)
+          // Calculate p(z | x)
           // Formula https://www.statisticshowto.com/bivariate-normal-distribution/
           // where x and y are assumed independent, i.e. their correlation = 0
           double z = (obs.x - u_x) * (obs.x - u_x) / std_x / std_x
                      + (obs.y - u_y) * (obs.y - u_y) / std_y / std_y;
           double prob = 1 / (2 * M_PI * std_x * std_y) * exp(- z / 2 );
-
           // weight = p(z1, z2, ... | x) = p(z1 | x) * p(z2 | x) * . . .
           weight *= prob;
           break;
         }
       }
     }
-    particle.weight = weight;
+    p.weight = weight;
   }
 
   // Normalize so that weights of all particles sum up to 1
@@ -182,7 +178,6 @@ void ParticleFilter::resample()
     int k = weight_distr(gen);
     resampled_particles.push_back(particles[k]);
   }
-
   particles = resampled_particles;
 }
 
