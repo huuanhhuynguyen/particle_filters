@@ -1,7 +1,7 @@
 # Particle Filter 
 
-This project contains the skeleton [code](https://github.com/udacity/CarND-Kidnapped-Vehicle-Project) 
-for the Localization course in Udacity's Self-Driving Car Nanodegree.
+This project is based on the template [code](https://github.com/udacity/CarND-Kidnapped-Vehicle-Project) 
+within the scope of the localization course in Udacity Self-Driving Car Nanodegree.
 
 <a href="https://www.youtube.com/watch?v=qKuo6CHQeHk" target="_blank">
 <img src="demo.gif" alt="circuit" width="500" height="341"/></a>
