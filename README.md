@@ -28,18 +28,18 @@ Once the install for uWebSocketIO is complete, the main program can be built
 and ran by doing the following from the project top directory.
 
 ```
-mkdir build && cd build
-cmake .. && make
-./particle_filter
+$ mkdir build && cd build
+$ cmake .. && make
+$ ./particle_filter
 ```
 
 Alternatively some scripts have been included to streamline this process, 
 these can be leveraged by executing the following in the top directory of the project:
 
 ```
-./clean.sh
-./build.sh
-./run.sh
+$ ./clean.sh
+$ ./build.sh
+$ ./run.sh
 ```
 
 # Structure
