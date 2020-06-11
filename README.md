@@ -17,25 +17,18 @@ particle filter will be given a map and some initial localization information
  get observation and control data.
 
 ## Running the Code
-This project involves the Term 2 Simulator which can be downloaded 
-[here](https://github.com/udacity/self-driving-car-sim/releases)
-
-This repository includes two files that can be used to set up and install 
-uWebSocketIO for either Linux or Mac systems. For windows you can use either 
-Docker, VMware, or even Windows 10 Bash on Ubuntu to install uWebSocketIO.
-
-Once the install for uWebSocketIO is complete, the main program can be built 
-and ran by doing the following from the project top directory.
-
+1. Download Term 2 Simulator [here](https://github.com/udacity/self-driving-car-sim/releases) and launch it.
+2. Install uWebSocketIO:
+- This repository includes two bash files for installing uWebSocketIO on Linux or Mac systems.
+- For Windows you can use either Docker, VMware, or even Windows 10 Bash on Ubuntu to install uWebSocketIO.
+3. Navigate to root `cd particle_filters`
+4. Build
 ```
 $ mkdir build && cd build
 $ cmake .. && make
 $ ./particle_filter
 ```
-
-Alternatively some scripts have been included to streamline this process, 
-these can be leveraged by executing the following in the top directory of the project:
-
+Alternatively, run:
 ```
 $ ./clean.sh
 $ ./build.sh
